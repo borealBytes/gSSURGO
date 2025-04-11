@@ -1,0 +1,32 @@
+# Ignore all .zip files
+*.zip
+
+# Ignore Python cache directories and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+build/
+.pytest_cach/
+
+# Ignore the .roomodes file
+.roomodes
+*.egg-info/
+
+# Distribution / packaging
+*.tar.gz
+*.whl
+dist/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE / Editor specific
+.vscode/
+.idea/
