@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gssurgo_parcel_pipeline"
+version = "0.1.0"
+description = "Pipeline for processing gSSURGO and parcel data."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+# Add dependencies as needed, e.g.,
+# dependencies = [
+#     "apache-airflow",
+#     "google-cloud-storage",
+#     "google-cloud-bigquery",
+#     "pandas",
+#     "geopandas", # Consider installation complexity
+# ]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License", # Adjust if using BSD or other
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "build",
+    "twine", # For PyPI publishing later
+]
+
+[tool.setuptools]
+# Include packages - adjust if your source code lives elsewhere (e.g., src/)
+packages = ["gssurgo_parcel_pipeline"] # Example package name
+
+[tool.ruff]
+# Ruff configuration (linter)
+line-length = 88
+select = ["E", "F", "W", "I"] # Enable basic flake8 rules + isort
+
+[tool.pytest.ini_options]
+# Pytest configuration
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]

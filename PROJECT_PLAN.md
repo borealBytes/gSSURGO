@@ -38,9 +38,9 @@ Develop a robust, scalable, and automated data pipeline using Apache Airflow on 
     *   - [ ] Confirm specific GCP services (e.g., Cloud Composer vs. self-managed Airflow, GCS buckets, BigQuery datasets, potential use of Cloud Functions/Dataproc).
     *   - [ ] Design high-level architecture for DAG 1 (gSSURGO Ingest) and DAG 2 (Parcel Analysis).
     *   - [ ] Define BigQuery table schemas for raw, intermediate, and final datasets.
-    *   - [ ] Detail the Git branching strategy (`main`, `test`, `feature/*`, `bugfix/*`) and merge flow.
-    *   - [ ] Define `main` -> `test` sync process.
-    *   - [ ] Outline CI/CD steps (Lint, Test, Build, Deploy) for GitHub Actions.
+    *   - [X] Detail the Git branching strategy (`main`, `test`, `feature/*`, `bugfix/*`) and merge flow. (Branch new work from `test`, PR to `test`, PR `test` -> `main` for release).
+    *   - [X] Define `main` <- `test` sync process. (Manual PR from `test` to `main` before releases).
+    *   - [X] Outline CI/CD steps (Lint, Test, Build, Deploy) for GitHub Actions.
     *   - [ ] Create initial GitHub repository with README, LICENSE (MIT/BSD), `.gitignore`, and `pyproject.toml`.
     *   - [ ] Set up basic VS Code development environment recommendations.
 
