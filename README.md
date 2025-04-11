@@ -1,4 +1,7 @@
-# gSSURGO & Parcel Data Pipeline
+<p align="center">
+  <img src="gSSURGO_logo.png" alt="gSSURGO Logo" width="35%">
+</p>
+
 
 ## 1. Project Overview
 
