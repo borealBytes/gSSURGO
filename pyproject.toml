@@ -7,7 +7,7 @@ name = "gssurgo_parcel_pipeline"
 version = "0.1.0"
 description = "Pipeline for processing gSSURGO and parcel data."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.13"
 license = "MIT"
 # Add dependencies as needed, e.g.,
 # dependencies = [
@@ -19,6 +19,7 @@ license = "MIT"
 # ]
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
     "Operating System :: OS Independent",
 ]
 
