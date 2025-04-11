@@ -37,6 +37,8 @@ packages = ["gssurgo_parcel_pipeline"] # Example package name
 [tool.ruff]
 # Ruff configuration (linter)
 line-length = 88
+
+[tool.ruff.lint]
 select = ["E", "F", "W", "I"] # Enable basic flake8 rules + isort
 
 [tool.pytest.ini_options]
