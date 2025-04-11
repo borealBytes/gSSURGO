@@ -2,9 +2,13 @@ name: Python CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push events for all branches
+  # Triggers the workflow on push events for specified branches
   push:
-    branches: [ "**" ]
+    branches:
+      - main
+      - test
+      - 'feature/**'
+      - 'bugfix/**'
   # Triggers the workflow on pull request events targeting main or test branches
   pull_request:
     branches: [ main, test ]
@@ -52,3 +56,63 @@ jobs:
       # This verifies the package build process works
       - name: Build package
         run: python -m build
+
+      # Upload the built package artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package
+          path: dist/
+
+  publish_to_testpypi:
+    name: Publish to TestPyPI
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Required for trusted publishing
+    # Trigger only on push to test branch, NOT on pull requests
+    if: "github.event_name == 'push' &amp;&amp; github.ref == 'refs/heads/test'"
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package
+          path: dist
+
+      - name: Publish package to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # No password needed, uses trusted publishing via OIDC
+        # Ensure you have configured trusted publishing in TestPyPI settings
+        # with:
+        #   repository-url: https://test.pypi.org/legacy/
+
+  publish_to_pypi:
+    name: Publish to PyPI
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Required for trusted publishing
+    # Trigger only on push to main branch, NOT on pull requests
+    if: "github.event_name == 'push' &amp;&amp; github.ref == 'refs/heads/main'"
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package
+          path: dist
+
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # No password needed, uses trusted publishing via OIDC
+        # Ensure you have configured trusted publishing in PyPI settings
+
+      # Optional: Create GitHub Release Tag after successful PyPI publish
+      # - name: Create GitHub Release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ github.ref_name }} # Assumes tag name matches branch name (e.g., v1.0.0) - adjust as needed
+      #     release_name: Release ${{ github.ref_name }}
+      #     draft: false
+      #     prerelease: false
